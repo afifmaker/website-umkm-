@@ -33,9 +33,16 @@
                 </div>
                 <p class="text-gray-500 text-sm mb-4 h-10 overflow-hidden">{{ Str::limit($product->description, 50) }}</p>
                 
-                <button class="w-full bg-yellow-400 text-black font-bold py-2 rounded-lg hover:bg-yellow-500 transition shadow-md">
-                    Masuk Keranjang
-                </button>
+                {{-- PERBAIKAN DI SINI: Menambahkan $product->id ke dalam route --}}
+                <form action="{{ route('cart.store', $product->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="menu_id" value="{{ $product->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    
+                    <button type="submit" class="w-full bg-yellow-400 text-black font-bold py-2 rounded-lg hover:bg-yellow-500 transition shadow-md">
+                        Masuk Keranjang
+                    </button>
+                </form>
 
                 @if(Auth::check() && Auth::user()->role == 'admin')
                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-end">

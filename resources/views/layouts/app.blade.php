@@ -103,6 +103,10 @@
     </nav>
 
     <main class="pt-24 min-h-screen">
+        {{-- Menampilkan slot jika menggunakan <x-app-layout> --}}
+        {{ $slot ?? '' }}
+
+        {{-- Menampilkan content jika menggunakan @extends --}}
         @yield('content')
     </main>
 
